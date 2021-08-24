@@ -14,4 +14,8 @@ func MessageCreateHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.Contains(m.Content, "*test") {
 		s.ChannelMessageSend(m.ChannelID, "https://tenor.com/view/police-miss-kobayashi-dragon-maid-kanna-kamui-sit-here-gif-12872035")
 	}
+
+	if strings.Contains(m.Content, "pedo") {
+		s.ChannelMessageSend(m.ChannelID, "they're a WHAT?!")
+	}
 }

@@ -35,7 +35,13 @@ func main() {
 		return
 	}
 
+	err = core.AppContext.Discord.UpdateGameStatus(0, "My clients are dumb as hell")
+	if err != nil {
+		log.Printf("Error setting bot status: %s\n", err.Error())
+	}
+
 	core.AppContext.Discord.AddHandler(core.MessageCreateHandler)
+	core.AppContext.Discord.AddHandler(core.Blacklist)
 
 	defer func(Discord *discordgo.Session) {
 		_ = Discord.Close()
@@ -44,6 +50,6 @@ func main() {
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
-	log.Println("Shutting down the Lawyer...")
+	log.Println("\n\nShutting down the Lawyer...")
 
 }
