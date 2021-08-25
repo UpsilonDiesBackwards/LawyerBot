@@ -42,6 +42,7 @@ func main() {
 
 	core.AppContext.Discord.AddHandler(core.MessageCreateHandler)
 	core.AppContext.Discord.AddHandler(core.Blacklist)
+	core.AppContext.Discord.AddHandler(core.Joinvoicechat)
 
 	defer func(Discord *discordgo.Session) {
 		_ = Discord.Close()

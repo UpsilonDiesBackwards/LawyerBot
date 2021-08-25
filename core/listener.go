@@ -15,7 +15,17 @@ func MessageCreateHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if strings.Contains(m.Content, "*test") {
+	if strings.Contains(m.Content, ">test") {
 		s.ChannelMessageSend(m.ChannelID, "https://tenor.com/view/police-miss-kobayashi-dragon-maid-kanna-kamui-sit-here-gif-12872035")
+	}
+
+	if strings.Contains(m.Content, ">vc join on") {
+		s.ChannelMessageSend(m.ChannelID, "Lawyer bot can now randomly join Voice Channels")
+		joinVC = true
+	}
+
+	if strings.Contains(m.Content, ">vc join off") {
+		s.ChannelMessageSend(m.ChannelID, "Lawyer bot can no longer randomly join Voice Channels")
+		joinVC = false
 	}
 }

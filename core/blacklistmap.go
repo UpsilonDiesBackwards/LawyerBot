@@ -1,35 +1,35 @@
 package core
 
 import (
-	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"math/rand"
 	"strings"
 	"time"
 )
 
-
-
 func Blacklist(s *discordgo.Session, m *discordgo.MessageCreate) {
-	blacklistedPhrases := map[string]bool {
-		"pedo": false,
-		"paedo": false,
-		"nonce": false,
+	blacklistedPhrases := map[string]bool{
+		"pedo":           false,
+		"paedo":          false,
+		"nonce":          false,
 		"kiddie fiddler": false,
-		"loli lover": false,
-		"reddit mod": false,
-		"discord mod": false,
-		"kitten": false,
-		"little girl": false,
-		"loli": false,
-		"kierbunny": false,
-		"anime": false,
-		"pervert": false,
-		"creep": false,
-		"daddy": false,
-		"uwu": false,
-		"owo": false,
-		"child toucher": false,
+		"loli lover":     false,
+		"reddit mod":     false,
+		"discord mod":    false,
+		"kitten":         false,
+		"little girl":    false,
+		"loli":           false,
+		"kierbunny":      false,
+		"anime":          false,
+		"pervert":        false,
+		"creep":          false,
+		"daddy":          false,
+		"uwu":            false,
+		"owo":            false,
+		"child toucher":  false,
+		"child":          false,
+		"amy":            false,
+		"amys favourite": false,
 	}
 
 	responses := make([]string, 0)
@@ -41,19 +41,29 @@ func Blacklist(s *discordgo.Session, m *discordgo.MessageCreate) {
 		"Yes officer, I would like to report a crime.",
 		"What type of Jeffrey Epstein shit is that?",
 		"The fuck?",
+		"You're definitely going to jail",
+		"I give up on you, you do ***not*** pay me enough for this",
 	)
 
 	for key, _ := range blacklistedPhrases {
-		fmt.Println("Key: ", key)
+		//fmt.Println("Key: ", key)
 
 		rand.Seed(time.Now().Unix())
 		if strings.Contains(m.Content, key) {
-			s.ChannelMessageSend(m.ChannelID, responses[rand.Intn(len(responses))])
+			_, err := s.ChannelMessageSend(m.ChannelID, responses[rand.Intn(len(responses))])
+			if err != nil {
+				println("\nFailed to send message response!\n")
+				return
+			}
 
 		}
 	}
 
 	if strings.Contains(m.Content, "*test") {
-		s.ChannelMessageSend(m.ChannelID, "The Lawyer is in court")
+		_, err := s.ChannelMessageSend(m.ChannelID, "The Lawyer is in court")
+		if err != nil {
+			println("\nFailed to send test message!\n")
+			return
+		}
 	}
 }
