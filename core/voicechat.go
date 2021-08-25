@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"github.com/bwmarrin/dgvoice"
 	"github.com/bwmarrin/discordgo"
 	"math/rand"
 	"time"
@@ -26,14 +27,22 @@ func Joinvoicechat(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if joinVC == true {
 		rand.Seed(time.Now().UnixNano())
-		n := rand.Intn(45) // n = max wait time in minutes
+		n := rand.Intn(5) // n = max wait time in minutes
 		fmt.Printf("\nSleeping %d minute(s)...\n", n)
-		time.Sleep(time.Duration(n) * time.Minute)
+		time.Sleep(time.Duration(n) * time.Second)
 		fmt.Println("Done")
 
 		vc := voiceChannels[rand.Intn(len(voiceChannels))]
+		v, _ := s.ChannelVoiceJoin(vc.GuildID, vc.ID, true, false)
 
-		_, _ = s.ChannelVoiceJoin(vc.GuildID, vc.ID, true, false)
+		time.Sleep(time.Duration(2) * time.Hour)
+		v, _ = s.ChannelVoiceJoin(vc.GuildID, vc.ID, false, false)
+
+		dgvoice.PlayAudioFile(v, "media/laugh.wav", make(chan bool))
+
+		time.Sleep(time.Duration(20) * time.Second)
+		v, _ = s.ChannelVoiceJoin(vc.GuildID, vc.ID, true, false)
+
 
 		//fmt.Println("Server: ", vc.GuildID, "Channel: ", vc.Name)
 		//
