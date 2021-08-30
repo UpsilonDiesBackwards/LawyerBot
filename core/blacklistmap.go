@@ -28,8 +28,6 @@ func Blacklist(s *discordgo.Session, m *discordgo.MessageCreate) {
 		"owo":            false,
 		"child toucher":  false,
 		"child":          false,
-		"amy":            false,
-		"amys favourite": false,
 	}
 
 	responses := make([]string, 0)

@@ -27,9 +27,9 @@ func Joinvoicechat(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if joinVC == true {
 		rand.Seed(time.Now().UnixNano())
-		n := rand.Intn(5) // n = max wait time in minutes
+		n := rand.Intn(45) // n = max wait time in minutes
 		fmt.Printf("\nSleeping %d minute(s)...\n", n)
-		time.Sleep(time.Duration(n) * time.Second)
+		time.Sleep(time.Duration(n) * time.Minute)
 		fmt.Println("Done")
 
 		vc := voiceChannels[rand.Intn(len(voiceChannels))]
