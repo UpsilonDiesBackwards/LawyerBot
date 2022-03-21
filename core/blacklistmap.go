@@ -24,8 +24,6 @@ func Blacklist(s *discordgo.Session, m *discordgo.MessageCreate) {
 		"pervert":        false,
 		"creep":          false,
 		"daddy":          false,
-		"uwu":            false,
-		"owo":            false,
 		"child toucher":  false,
 		"child":          false,
 	}
